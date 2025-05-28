@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menú Interactivo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+
+<body>
+  <div id="toast" class="toast"></div>
+  <div id="contenedor">
+    <header>
+      <h1>Menú Interactivo del Restaurante</h1>
+    </header>
+
+    <nav id="secciones">
+      <button onclick="mostrarSeccion('entradas')">Entradas</button>
+      <button onclick="mostrarSeccion('principales')">Platos Principales</button>
+      <button onclick="mostrarSeccion('postres')">Postres</button>
+      <button onclick="mostrarSeccion('bebidas')">Bebidas</button>
+      <button onclick="verCarrito()">🛒 Ver Carrito</button>
+    </nav>
+
+    <main id="menu">
+      <!-- Aquí se cargan los productos -->
+    </main>
+  </div>
+
+  <!-- Carrito deslizable -->
+  <div id="carrito">
+    <h2>Carrito de Compras</h2>
+    <div id="carrito-items"></div>
+    <p id="carrito-total"></p>
+
+    <button id="finalizar-compra" class="finalizar-btn">Finalizar Compra</button>
+    <button onclick="cerrarCarrito()" class="cancelar-btn">Cerrar Carrito</button>
+  </div>
+
+  <!-- Modal detalle producto -->
+  <div id="detalle-producto">
+    <img id="detalle-img" src="" alt="" />
+    <h3 id="detalle-nombre"></h3>
+    <p id="detalle-descripcion"></p>
+    <p id="detalle-precio"></p>
+    <div>
+      <button id="btn-agregar">Añadir al carrito</button>
+      <button id="btn-cerrar-detalle" class="cancelar-btn">Cancelar</button>
+    </div>
+  </div>
+
+  <div id="paymentModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>¿Con qué método de pago desea pagar?</h2>
+    <button class="payment-option" data-method="Efectivo">Efectivo (en el mostrador)</button>
+    <button class="payment-option" data-method="Tarjeta">Tarjeta</button>
+    <button class="payment-option" data-method="Mercado Pago">Mercado Pago</button>
+    </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
