@@ -152,7 +152,7 @@ function agregarAlCarrito(seccion, index) {
 }
 
 
-// Mostrar carrito
+// Mostrar carrito jakjad
 function verCarrito() {
   const carritoDiv = document.getElementById("carrito");
   carritoDiv.classList.add("abierto");
