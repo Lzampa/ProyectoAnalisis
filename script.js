@@ -1,4 +1,4 @@
-// Datos de productos este cambio esta mal hecho lorens
+// Datos de productos este cambio esta bien tengo alta langosta
 const productos = {
   entradas: [
     {
