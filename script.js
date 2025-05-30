@@ -114,6 +114,7 @@ function mostrarDetalle(seccion, index) {
   detalleProducto.style.display = "flex";
 }
 
+
 btnCerrarDetalle.onclick = () => {
   detalleProducto.style.display = "none";
 };
@@ -122,6 +123,7 @@ btnAgregar.onclick = () => {
   agregarAlCarrito(seccionActual, indexActual);
   detalleProducto.style.display = "none";
 };
+
 
 function mostrarToast(mensaje) {
   const toast = document.getElementById("toast");
