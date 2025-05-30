@@ -1,4 +1,4 @@
-// Datos de productos
+// Datos de productos ...
 const productos = {
   entradas: [
     {
