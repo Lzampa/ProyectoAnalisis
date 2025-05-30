@@ -1,4 +1,4 @@
-// Datos de productos esto lp cambie ahora
+// Datos de productos este cambio esta mal hecho lorens
 const productos = {
   entradas: [
     {
