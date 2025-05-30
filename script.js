@@ -151,7 +151,7 @@ function agregarAlCarrito(seccion, index) {
   }
 }
 
-
+// comentario de js 
 // Mostrar carrito
 function verCarrito() {
   const carritoDiv = document.getElementById("carrito");
