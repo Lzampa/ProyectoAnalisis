@@ -61,10 +61,21 @@ const productos = {
 // Variables globales
 let carrito = [];
 
-// Mostrar mensaje flotante
-function mostrarMensajeFlotante(mensaje) {
+// Mostrar mensaje flotante con diferentes tipos
+function mostrarMensajeFlotante(mensaje, tipo = 'exito') {
   const mensajeFlotante = document.getElementById("mensaje-flotante");
   mensajeFlotante.textContent = mensaje;
+  
+  // Limpiar clases previas
+  mensajeFlotante.className = '';
+  
+  // Agregar clase según el tipo
+  if (tipo === 'info') {
+    mensajeFlotante.classList.add('mensaje-info');
+  } else {
+    mensajeFlotante.classList.add('mensaje-exito');
+  }
+  
   mensajeFlotante.style.display = "block";
   mensajeFlotante.style.animation = "none";
   void mensajeFlotante.offsetWidth;
@@ -197,14 +208,24 @@ function eliminarDelCarrito(index) {
   actualizarCarrito();
 }
 
-// Finalizar compra
+// Finalizar compra - CORREGIDO
 function finalizarCompra() {
   if (carrito.length === 0) {
-    mostrarMensajeFlotante("El carrito está vacío.");
+    mostrarMensajeFlotante("El carrito está vacío.", 'info');
     return;
   }
 
-  document.getElementById("paymentModal").style.display = "block";
+  // Mostrar modal correctamente
+  const modal = document.getElementById("paymentModal");
+  modal.style.display = "flex";
+  modal.classList.add("abierta");
+}
+
+// Función para cerrar el modal de pago
+function cerrarModalPago() {
+  const modal = document.getElementById("paymentModal");
+  modal.style.display = "none";
+  modal.classList.remove("abierta");
 }
 
 // Eventos al cargar
@@ -214,21 +235,36 @@ document.addEventListener("DOMContentLoaded", () => {
   // Click en Finalizar Compra
   document.getElementById("finalizar-compra").addEventListener("click", finalizarCompra);
 
-  // Cerrar modal
-  document.querySelector(".close-modal").addEventListener("click", () => {
-    document.getElementById("paymentModal").style.display = "none";
-  });
+  // Cerrar modal - CORREGIDO
+  document.querySelector(".close-modal").addEventListener("click", cerrarModalPago);
 
-  // Opciones de pago
+  // Opciones de pago - CORREGIDO
   document.querySelectorAll(".payment-option").forEach(btn => {
     btn.addEventListener("click", e => {
       const metodo = e.target.dataset.method;
-      mostrarMensajeFlotante(`Compra finalizada con ${metodo}. ¡Gracias!`);
-      carrito = [];
-      actualizarCarrito();
-      cerrarCarrito();
-      document.getElementById("paymentModal").style.display = "none";
+      
+      // Cerrar modal primero
+      cerrarModalPago();
+      
+      // Mostrar mensaje de método de pago cargado
+      mostrarMensajeFlotante(`Su método de pago "${metodo}" ha sido cargado exitosamente`, 'info');
+      
+      // Esperar un poco antes de mostrar el mensaje de compra finalizada
+      setTimeout(() => {
+        mostrarMensajeFlotante(`Compra finalizada con ${metodo}. ¡Gracias por su pedido!`, 'exito');
+        
+        // Limpiar carrito y cerrar
+        carrito = [];
+        actualizarCarrito();
+        cerrarCarrito();
+      }, 2000);
     });
   });
-});
 
+  // Cerrar modal al hacer click fuera de él
+  document.getElementById("paymentModal").addEventListener("click", function(e) {
+    if (e.target === this) {
+      cerrarModalPago();
+    }
+  });
+});
