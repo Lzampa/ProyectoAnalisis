@@ -148,9 +148,12 @@ nav button:hover {
   display: none;
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.4);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -171,6 +174,7 @@ nav button:hover {
   color: #4e342e;
 }
 
+/* Detalle de producto */
 #detalle-producto {
   display: none;
   position: fixed;
@@ -203,6 +207,7 @@ nav button:hover {
   margin: 8px 6px 0 6px;
 }
 
+/* Mensaje flotante */
 #mensaje-flotante {
   position: fixed;
   top: 20px;
@@ -225,11 +230,11 @@ nav button:hover {
   100% { opacity: 0; }
 }
 
-/* Estilo para el botón Agregar al carrito */
+/* Botón agregar al carrito */
 #btn-agregar {
-  background-color: white; /* Fondo blanco */
-  color: black; /* Texto negro */
-  border: 1px solid #8d6e63; /* Borde del color del botón cancelar */
+  background-color: white;
+  color: black;
+  border: 1px solid #8d6e63;
   padding: 10px 12px;
   border-radius: 8px;
   cursor: pointer;
@@ -239,11 +244,11 @@ nav button:hover {
 }
 
 #btn-agregar:hover {
-  background-color: #8d6e63; /* Fondo oscuro al pasar el cursor */
-  color: white; /* Texto blanco en hover */
+  background-color: #8d6e63;
+  color: white;
 }
 
-/* Mantener el mismo estilo del botón Cancelar */
+/* Botón cancelar estilo consistente */
 .cancelar-btn {
   background-color: #8d6e63;
   color: white;

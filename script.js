@@ -1,4 +1,4 @@
-// Datos de productos este cambio esta bien tengo alta langosta
+// Datos de productos
 const productos = {
   entradas: [
     {
@@ -61,23 +61,21 @@ const productos = {
 // Variables globales
 let carrito = [];
 
-// Función para mostrar el mensaje flotante en rojo durante 3 segundos
+// Mostrar mensaje flotante
 function mostrarMensajeFlotante(mensaje) {
   const mensajeFlotante = document.getElementById("mensaje-flotante");
   mensajeFlotante.textContent = mensaje;
   mensajeFlotante.style.display = "block";
-  
-  // Reiniciar animación
   mensajeFlotante.style.animation = "none";
-  void mensajeFlotante.offsetWidth; // Forzar el reinicio de la animación
-  mensajeFlotante.style.animation = "fadeOut 3s ease-out forwards"; // Cambiar a 3 segundos
+  void mensajeFlotante.offsetWidth;
+  mensajeFlotante.style.animation = "fadeOut 3s ease-out forwards";
 
   setTimeout(() => {
     mensajeFlotante.style.display = "none";
-  }, 3000); // Desaparece después de 3 segundos
+  }, 3000);
 }
 
-// Mostrar productos según sección
+// Mostrar productos por sección
 function mostrarSeccion(seccion) {
   const menu = document.getElementById("menu");
   menu.innerHTML = "";
@@ -102,7 +100,7 @@ function mostrarSeccion(seccion) {
   menu.innerHTML = html;
 }
 
-// Modal detalle producto
+// Modal de detalle
 const detalleProducto = document.getElementById("detalle-producto");
 const detalleImg = document.getElementById("detalle-img");
 const detalleNombre = document.getElementById("detalle-nombre");
@@ -122,11 +120,9 @@ function mostrarDetalle(seccion, index) {
   indexActual = index;
 
   detalleImg.src = item.imagen;
-  detalleImg.alt = item.nombre;
   detalleNombre.textContent = item.nombre;
   detalleDescripcion.textContent = item.descripcion;
   detallePrecio.textContent = `Precio: $${item.precio}`;
-
   detalleProducto.style.display = "flex";
 }
 
@@ -139,7 +135,7 @@ btnAgregar.onclick = () => {
   detalleProducto.style.display = "none";
 };
 
-// Agregar producto al carrito
+// Agregar al carrito
 function agregarAlCarrito(seccion, index) {
   const item = productos[seccion][index];
   const pos = carrito.findIndex(producto => producto.nombre === item.nombre);
@@ -149,28 +145,24 @@ function agregarAlCarrito(seccion, index) {
     carrito.push({ ...item, cantidad: 1 });
   }
   mostrarMensajeFlotante(`${item.nombre} agregado al carrito.`);
-  
-  // Actualizar vista del carrito si está abierto
-  const carritoDiv = document.getElementById("carrito");
-  if (carritoDiv.classList.contains("abierto")) {
+
+  if (document.getElementById("carrito").classList.contains("abierto")) {
     actualizarCarrito();
   }
 }
 
-// Mostrar carrito
+// Ver carrito
 function verCarrito() {
-  const carritoDiv = document.getElementById("carrito");
-  carritoDiv.classList.add("abierto");
+  document.getElementById("carrito").classList.add("abierto");
   actualizarCarrito();
 }
 
 // Cerrar carrito
 function cerrarCarrito() {
-  const carritoDiv = document.getElementById("carrito");
-  carritoDiv.classList.remove("abierto");
+  document.getElementById("carrito").classList.remove("abierto");
 }
 
-// Actualizar vista del carrito
+// Actualizar carrito
 function actualizarCarrito() {
   const carritoItems = document.getElementById("carrito-items");
   carritoItems.innerHTML = "";
@@ -181,7 +173,6 @@ function actualizarCarrito() {
     carrito.forEach((producto, index) => {
       const item = document.createElement("div");
       item.style.marginBottom = "12px";
-
       item.innerHTML = `
         <p><strong>${producto.nombre}</strong> x${producto.cantidad}</p>
         <p>Precio unitario: $${producto.precio}</p>
@@ -193,36 +184,51 @@ function actualizarCarrito() {
     });
   }
 
-  // Total
   const total = carrito.reduce(
     (acc, prod) => acc + prod.precio * prod.cantidad,
     0
   );
-  const carritoTotal = document.getElementById("carrito-total");
-  carritoTotal.textContent = `Total: $${total}`;
+  document.getElementById("carrito-total").textContent = `Total: $${total}`;
 }
 
-// Eliminar producto del carrito
+// Eliminar producto
 function eliminarDelCarrito(index) {
   carrito.splice(index, 1);
   actualizarCarrito();
 }
 
-// Mostrar la primera sección por defecto
-document.addEventListener("DOMContentLoaded", () => {
-  mostrarSeccion("entradas");
-});
-
+// Finalizar compra
 function finalizarCompra() {
   if (carrito.length === 0) {
-    mostrarToast("El carrito está vacío.");
+    mostrarMensajeFlotante("El carrito está vacío.");
     return;
   }
 
-  if (confirm("¿Deseas finalizar la compra?")) {
-    carrito = [];
-    actualizarCarrito();
-    mostrarToast("¡Compra finalizada con éxito!");
-    cerrarCarrito();
-  }
+  document.getElementById("paymentModal").style.display = "block";
 }
+
+// Eventos al cargar
+document.addEventListener("DOMContentLoaded", () => {
+  mostrarSeccion("entradas");
+
+  // Click en Finalizar Compra
+  document.getElementById("finalizar-compra").addEventListener("click", finalizarCompra);
+
+  // Cerrar modal
+  document.querySelector(".close-modal").addEventListener("click", () => {
+    document.getElementById("paymentModal").style.display = "none";
+  });
+
+  // Opciones de pago
+  document.querySelectorAll(".payment-option").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const metodo = e.target.dataset.method;
+      mostrarMensajeFlotante(`Compra finalizada con ${metodo}. ¡Gracias!`);
+      carrito = [];
+      actualizarCarrito();
+      cerrarCarrito();
+      document.getElementById("paymentModal").style.display = "none";
+    });
+  });
+});
+
