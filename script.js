@@ -61,6 +61,22 @@ const productos = {
 // Variables globales
 let carrito = [];
 
+// Función para mostrar el mensaje flotante en rojo durante 3 segundos
+function mostrarMensajeFlotante(mensaje) {
+  const mensajeFlotante = document.getElementById("mensaje-flotante");
+  mensajeFlotante.textContent = mensaje;
+  mensajeFlotante.style.display = "block";
+  
+  // Reiniciar animación
+  mensajeFlotante.style.animation = "none";
+  void mensajeFlotante.offsetWidth; // Forzar el reinicio de la animación
+  mensajeFlotante.style.animation = "fadeOut 3s ease-out forwards"; // Cambiar a 3 segundos
+
+  setTimeout(() => {
+    mensajeFlotante.style.display = "none";
+  }, 3000); // Desaparece después de 3 segundos
+}
+
 // Mostrar productos según sección
 function mostrarSeccion(seccion) {
   const menu = document.getElementById("menu");
@@ -114,7 +130,6 @@ function mostrarDetalle(seccion, index) {
   detalleProducto.style.display = "flex";
 }
 
-
 btnCerrarDetalle.onclick = () => {
   detalleProducto.style.display = "none";
 };
@@ -123,17 +138,6 @@ btnAgregar.onclick = () => {
   agregarAlCarrito(seccionActual, indexActual);
   detalleProducto.style.display = "none";
 };
-
-
-function mostrarToast(mensaje) {
-  const toast = document.getElementById("toast");
-  toast.textContent = mensaje;
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2500); // desaparece luego de 2.5 segundos
-}
 
 // Agregar producto al carrito
 function agregarAlCarrito(seccion, index) {
@@ -144,7 +148,7 @@ function agregarAlCarrito(seccion, index) {
   } else {
     carrito.push({ ...item, cantidad: 1 });
   }
-  mostrarToast(`${item.nombre} agregado al carrito.`);
+  mostrarMensajeFlotante(`${item.nombre} agregado al carrito.`);
   
   // Actualizar vista del carrito si está abierto
   const carritoDiv = document.getElementById("carrito");
@@ -153,8 +157,7 @@ function agregarAlCarrito(seccion, index) {
   }
 }
 
-
-// Mostrar carrito jakjad
+// Mostrar carrito
 function verCarrito() {
   const carritoDiv = document.getElementById("carrito");
   carritoDiv.classList.add("abierto");
@@ -223,23 +226,3 @@ function finalizarCompra() {
     cerrarCarrito();
   }
 }
-
-// Mostrar modal al hacer click en "Finalizar compra"
-document.getElementById("finalizar-compra").addEventListener("click", function () {
-  document.getElementById("paymentModal").style.display = "flex";
-});
-
-// Cerrar modal con la X
-document.querySelector(".close-modal").addEventListener("click", function () {
-  document.getElementById("paymentModal").style.display = "none";
-});
-
-// Capturar opción seleccionada
-document.querySelectorAll(".payment-option").forEach(button => {
-  button.addEventListener("click", function () {
-    const metodo = this.dataset.method;
-    alert("Has elegido pagar con: " + metodo); // Acá podés continuar con el flujo real
-    document.getElementById("paymentModal").style.display = "none";
-  });
-});
-
