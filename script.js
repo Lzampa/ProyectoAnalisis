@@ -5,7 +5,7 @@ const productos = {
       nombre: "Ensalada César",
       precio: 1200,
       descripcion: "Lechuga, pollo, crutones y aderezo César.",
-      imagen: "https://cdn-icons-png.flaticon.com/512/3542/3542496.png",
+      imagen: "https://masonrecipes.com/wp-content/webp-express/webp-images/uploads/2025/02/Image_3-140.png.webp",
     },
     {
       nombre: "Bruschetta",
