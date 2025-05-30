@@ -1,4 +1,4 @@
-// Datos de productos
+// Datos de productos esto lp cambie ahora
 const productos = {
   entradas: [
     {
