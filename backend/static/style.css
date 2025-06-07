@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #f5f0e6;
+  background-color: #bbbbbb;
   color: #4e342e;
 }
 
@@ -145,7 +145,7 @@ nav button:hover {
   z-index: 2000;
 }
 
-/* Asegurar que el modal se muestre cuando tenga la clase 'abierta' */
+
 .modal.abierta,
 #detalle-producto.abierto {
   display: flex !important;
@@ -163,7 +163,7 @@ nav button:hover {
   position: relative;
 }
 
-/* Mejorar el diseño de las opciones de pago */
+
 .payment-option {
   display: block;
   width: 100%;

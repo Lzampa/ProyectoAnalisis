@@ -4,14 +4,57 @@ const productos = {
     {
       nombre: "Ensalada César",
       precio: 1200,
-      descripcion: "Lechuga, pollo, crutones y aderezo César.",
+      descripcion: "ensalada clásica que combina lechuga romana, croûtons (trozos de pan tostado), queso parmesano, jugo de limón, aceite de oliva, huevo, salsa Worcestershire, anchoas, ajo, mostaza de Dijon (opcional) y pimienta negra",
       imagen: "https://masonrecipes.com/wp-content/webp-express/webp-images/uploads/2025/02/Image_3-140.png.webp",
     },
     {
       nombre: "Bruschetta",
       precio: 800,
-      descripcion: "Pan tostado con tomate, ajo y albahaca.",
+      descripcion: "rebanadas de pan tostado frotadas con ajo y cubiertas con aceite de oliva, sal y otros ingredientes como tomate, albahaca, queso o vegetales",
       imagen: "https://i.pinimg.com/736x/07/10/55/071055249e27852a2e9341ed25fe239d.jpg",
+    },
+    {
+      nombre: "Rollitos de primavera",
+      precio: 950,
+      descripcion: "envolturas crujientes rellenas de verduras salteadas y fideos",
+      imagen: "https://cdn2.cocinadelirante.com/sites/default/files/images/2018/04/receta-rollitos-primavera-con-tortilla-de-harina.jpg",
+    },
+    {
+      nombre: "Dip de espinaca y alcachofa",
+      precio: 1100,
+      descripcion: "crema de espinacas con corazones de alcachofa, queso y especias",
+      imagen: "https://th.bing.com/th/id/R.44293e3e21ff70868927d4ac490a374c?rik=SM2GAzCkWvseqg&riu=http%3a%2f%2fwww.vitamixespana.com%2frecetas%2fwp-content%2fuploads%2f2019%2f01%2fdip-de-espinacas.jpg&ehk=SX9CwoNr1MQqKWdi9kVxUxUEUIi32Z3a4v7hXiUmqT8%3d&risl=&pid=ImgRaw&r=0",
+    },
+    {
+      nombre: "Calamares fritos",
+      precio: 1300,
+      descripcion: "aros de calamar empanizados, servidos con alioli",
+      imagen: "https://th.bing.com/th/id/R.3fb2d0ad7c5172f8e1c8f33efca63494?rik=QwmzFVsNDMFCyA&riu=http%3a%2f%2fcooknshare.com%2fwp-content%2fuploads%2f2013%2f10%2fcalamari.jpg&ehk=l31NPuPgPBNII6xSFPHQQYxS2cNxbgF%2fCwkTQAfQ298%3d&risl=&pid=ImgRaw&r=0",
+    },
+    
+    {
+      nombre: "Empanadas de carne",
+      precio: 700,
+      descripcion: "masa rellena de carne picada, cebolla y especias, horneadas o fritas",
+      imagen: "https://th.bing.com/th/id/OIP.etFI5GeYrcCehme5yExidAHaE8?r=0&rs=1&pid=ImgDetMain",
+    },
+    {
+      nombre: "Pinchos de pollo",
+      precio: 850,
+      descripcion: "trocitos de pollo marinado en brocheta, grillados",
+      imagen: "https://th.bing.com/th/id/OIP.0RoEyNC3y8L7BZP-vRcGBAHaEK?r=0&rs=1&pid=ImgDetMain",
+    },
+    {
+      nombre: "Tablas de quesos",
+      precio: 1500,
+      descripcion: "selección de quesos artesanales, nueces y mermeladas",
+      imagen: "https://th.bing.com/th/id/OIP.aS9Fh6qPSFrYjDT49vDxoAHaHx?r=0&rs=1&pid=ImgDetMain",
+    },
+    {
+      nombre: "Tostadas de aguacate",
+      precio: 950,
+      descripcion: "pan integral con puré de aguacate, limón, sal y pimienta",
+      imagen: "https://th.bing.com/th/id/OIP.NXHzYf7DJRZRQ8C2w1FnbAHaE8?r=0&rs=1&pid=ImgDetMain",
     },
   ],
   principales: [
@@ -27,6 +70,54 @@ const productos = {
       descripcion: "Pasta con salsa boloñesa tradicional.",
       imagen: "https://i.pinimg.com/736x/2b/e8/63/2be8631b54c8a0c48142f58099128f00.jpg",
     },
+    {
+      nombre: "Filete de salmón",
+      precio: 2200,
+      descripcion: "salmón a la plancha, con salsa de limón y eneldo",
+      imagen: "https://th.bing.com/th/id/OIP.RMFPihAup19edTMeWqrGkgHaE8?r=0&rs=1&pid=ImgDetMain",
+    },
+    {
+      nombre: "Risotto de champiñones",
+      precio: 1750,
+      descripcion: "arroz cremoso con setas salteadas y parmesano",
+      imagen: "https://th.bing.com/th/id/OIP.2bRYYGJY_U-u8QvHBgU_lgHaEo?r=0&rs=1&pid=ImgDetMain",
+    },
+    {
+      nombre: "Lomo a la pimienta",
+      precio: 2400,
+      descripcion: "medallones de lomo en salsa cremosa de pimienta",
+      imagen: "https://misrecetasdecocina.net/wp-content/uploads/2019/01/incre%C3%ADble-lomo-a-la-pimienta.jpg",
+    },
+    {
+      nombre: "Lasagna de carne",
+      precio: 1800,
+      descripcion: "capas de pasta con carne, salsa bechamel y queso gratinado",
+      imagen: "https://th.bing.com/th/id/OIP.6GW-V2ucpnI-VjxYi6gbUwHaEK?r=0&rs=1&pid=ImgDetMain",
+    },
+    {
+      nombre: "Tacos de carnita",
+      precio: 1450,
+      descripcion: "tortillas rellenas de cerdo adobado, cebolla y cilantro",
+      imagen: "https://cielitorosado.com/wp-content/uploads/2022/11/CARNITAS-sm.jpg",
+    },
+    {
+      nombre: "Curry de vegetales",
+      precio: 1650,
+      descripcion: "mezcla de vegetales en salsa de curry suave, con arroz",
+      imagen: "https://th.bing.com/th/id/OIP.XFjCVzQuQ2WhXsZZTub5bQHaE6?r=0&rs=1&pid=ImgDetMain",
+    },
+    {
+      nombre: "Hamburguesa clásica",
+      precio: 1500,
+      descripcion: "pan brioche con carne de res, queso cheddar, lechuga y tomate",
+      imagen: "https://i.pinimg.com/originals/89/94/3e/89943eddc9dba2d33ba320d0f961db0b.jpg",
+    },
+    {
+      nombre: "Paella mixta",
+      precio: 2600,
+      descripcion: "arroz con mariscos, pollo y chorizo, al azafrán",
+      imagen: "https://th.bing.com/th/id/R.653a1b527cbcbc038a4f7befe56c014a?rik=PGnZMO3l7HRs1Q&riu=http%3a%2f%2f2.bp.blogspot.com%2f_E9gfBDmEIws%2fS-CNZb3yTKI%2fAAAAAAAAAY8%2fp9Bs8b6KA_s%2fs1600%2fIMG_0182.JPG&ehk=9uW3LpPgANP5Vmx6tqf4oZ7IHh9V9Js1tbtkN9Xn7Yw%3d&risl=&pid=ImgRaw&r=0",
+    },
   ],
   postres: [
     {
@@ -41,6 +132,43 @@ const productos = {
       descripcion: "Helado cremoso de vainilla con chocolate.",
       imagen: "https://i.pinimg.com/736x/00/f1/82/00f182a249cb5f407f81785cf4cac798.jpg",
     },
+    {
+      nombre: "Brownie de chocolate",
+      precio: 850,
+      descripcion: "brownie húmedo con nueces y salsa de caramelo",
+      imagen: "https://th.bing.com/th/id/OIP.o3Wd3dK0MwKmW1TOEvV3YgHaE8?r=0&o=7rm=3&rs=1&pid=ImgDetMain",
+    },
+    {
+      nombre: "Cheesecake de frutos rojos",
+      precio: 950,
+      descripcion: "tarta de queso suave con coulis de frutos rojos",
+      imagen: "https://cdn0.recetasgratis.net/es/posts/1/4/9/cheesecake_de_frutos_rojos_73941_paso_6_orig.jpg",
+    },
+    {
+      nombre: "Crème brûlée",
+      precio: 1000,
+      descripcion: "crema de vainilla con cobertura de azúcar caramelizado",
+      imagen: "https://th.bing.com/th/id/R.d577397055559c863a6feac00aa1aa79?rik=6T5NLFphiSh7Zg&riu=http%3a%2f%2fimg.food.com%2ffood%2fCreme-Brulee%2b1.JPG&ehk=RrUDieygMwoLvuCUI2fGWF5jB8hjzlCm1v2fywOzRxA%3d&risl=1&pid=ImgRaw&r=0",
+    },
+    {
+      nombre: "Mousse de chocolate",
+      precio: 900,
+      descripcion: "espuma ligera de chocolate negro",
+      imagen: "https://d1uz88p17r663j.cloudfront.net/original/405e0bb344ede9f3e2384ac9cf8e41ee_mousse-classica-chocolate-receitas-nestle.jpg",
+    },
+    {
+      nombre: "Panna cotta",
+      precio: 850,
+      descripcion: "postre italiano de crema cuajada con salsa de frutos",
+      imagen: "https://th.bing.com/th/id/R.99025fc18e2c242b696e818a09bd3bf2?rik=huiTVFYy7cLH5g&pid=ImgRaw&r=0",
+    },
+    {
+      nombre: "Tarta de manzana",
+      precio: 800,
+      descripcion: "manzana horneada con canela y masa hojaldrada",
+      imagen: "https://th.bing.com/th/id/OIP.g0bP8AMMM0Cxe_Okl2tPOQHaE8?r=0&rs=1&pid=ImgDetMain",
+    },
+  
   ],
   bebidas: [
     {
@@ -55,8 +183,41 @@ const productos = {
       descripcion: "Refresco de cola clásico de un litro.",
       imagen: "https://i.pinimg.com/736x/33/38/71/333871f88e37d6be577be2b66e16afcf.jpg",
     },
+    {
+      nombre: "Jugo de naranja",
+      precio: 600,
+      descripcion: "jugo exprimido de naranjas naturales",
+      imagen: "https://www.fmdos.cl/wp-content/uploads/2017/06/jugo2.jpg",
+    },
+    {
+      nombre: "Cerveza artesana",
+      precio: 950,
+      descripcion: "botella de 330ml de cerveza local elaborada artesanalmente",
+      imagen: "https://th.bing.com/th/id/OIP.xeze-HKegXwuHMuxPERItwHaE8?r=0&rs=1&pid=ImgDetMain",
+    },
+    {
+      nombre: "Mojito",
+      precio: 1200,
+      descripcion: "ron blanco, hierbabuena, lima, azúcar y soda",
+      imagen: "https://ik.imagekit.io/bhug69xts/mojito.png",
+    },
+
+    {
+      nombre: "Limonada casera",
+      precio: 550,
+      descripcion: "limón, azúcar, agua y hielo",
+      imagen: "https://www.recetasderechupete.com/wp-content/uploads/2022/06/Limonada-casera-en-jarra-1200x828.jpg",
+    },
+
+    {
+      nombre: "Vino tinto (copa)",
+      precio: 700,
+      descripcion: "copa de vino tinto reserva",
+      imagen: "https://www.sinembargo.mx/wp-content/uploads/2017/08/copa-vino-tinto.jpg",
+    },
   ],
 };
+
 
 // Variables globales
 let carrito = [];
