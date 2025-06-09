@@ -29,7 +29,7 @@ const productos = {
       nombre: "Calamares fritos",
       precio: 1300,
       descripcion: "aros de calamar empanizados, servidos con alioli",
-      imagen: "https://th.bing.com/th/id/R.3fb2d0ad7c5172f8e1c8f33efca63494?rik=QwmzFVsNDMFCyA&riu=http%3a%2f%2fcooknshare.com%2fwp-content%2fuploads%2f2013%2f10%2fcalamari.jpg&ehk=l31NPuPgPBNII6xSFPHQQYxS2cNxbgF%2fCwkTQAfQ298%3d&risl=&pid=ImgRaw&r=0",
+      imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRvnygUbzQmAh1ohTYLTZPf0ZIAB-TSt5mag&s",
     },
     
     {
@@ -226,17 +226,17 @@ let carrito = [];
 function mostrarMensajeFlotante(mensaje, tipo = 'exito') {
   const mensajeFlotante = document.getElementById("mensaje-flotante");
   mensajeFlotante.textContent = mensaje;
-  
+
   // Limpiar clases previas
   mensajeFlotante.className = '';
-  
+
   // Agregar clase según el tipo
   if (tipo === 'info') {
     mensajeFlotante.classList.add('mensaje-info');
   } else {
     mensajeFlotante.classList.add('mensaje-exito');
   }
-  
+
   mensajeFlotante.style.display = "block";
   mensajeFlotante.style.animation = "none";
   void mensajeFlotante.offsetWidth;
@@ -369,7 +369,7 @@ function eliminarDelCarrito(index) {
   actualizarCarrito();
 }
 
-// Finalizar compra - CORREGIDO
+// Finalizar compra
 function finalizarCompra() {
   if (carrito.length === 0) {
     mostrarMensajeFlotante("El carrito está vacío.", 'info');
@@ -389,32 +389,177 @@ function cerrarModalPago() {
   modal.classList.remove("abierta");
 }
 
+// FUNCIÓN QR MEJORADA - Usando QRCode.js
+function mostrarQR(url) {
+  const qrModal = document.getElementById("qrModal");
+  const qrcodeDiv = document.getElementById("qrcode");
+  
+  // Limpiar contenido anterior
+  qrcodeDiv.innerHTML = "";
+  
+  console.log("🔄 Generando QR para URL:", url);
+  
+  // Verificar que QRCode esté disponible
+  if (typeof QRCode === 'undefined') {
+    console.error("❌ QRCode.js no está cargado");
+    mostrarQRFallback(url, qrcodeDiv);
+    qrModal.style.display = "flex";
+    return;
+  }
+  
+  try {
+    // Crear contenedor para el QR
+    const qrContainer = document.createElement('div');
+    qrContainer.style.textAlign = 'center';
+    qrContainer.style.padding = '20px';
+    
+    // Agregar mensaje arriba del QR
+    const mensaje = document.createElement('p');
+    mensaje.textContent = 'Redireccionando a Mercado Pago';
+    mensaje.style.marginBottom = '15px';
+    mensaje.style.fontSize = '16px';
+    mensaje.style.color = '#333';
+    qrContainer.appendChild(mensaje);
+    
+    // Crear div para el QR
+    const qrDiv = document.createElement('div');
+    qrDiv.id = 'qr-container';
+    qrDiv.style.display = 'inline-block';
+    qrDiv.style.margin = '0 auto';
+    qrContainer.appendChild(qrDiv);
+    
+    // Agregar enlace de respaldo
+    const enlaceRespaldo = document.createElement('div');
+    enlaceRespaldo.style.marginTop = '15px';
+    enlaceRespaldo.innerHTML = `
+      <p style="font-size: 14px; color: #666; margin-bottom: 10px;">
+        ¿No funciona el QR?
+      </p>
+      <a href="${url}" target="_blank" 
+         style="display: inline-block; padding: 10px 20px; background: #00a650; 
+                color: white; text-decoration: none; border-radius: 6px; font-weight: bold;">
+        Abrir Mercado Pago
+      </a>
+    `;
+    qrContainer.appendChild(enlaceRespaldo);
+    
+    qrcodeDiv.appendChild(qrContainer);
+    
+    // Generar QR con QRCode.js
+    new QRCode(qrDiv, {
+      text: url,
+      width: 280,
+      height: 280,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+    
+    console.log("✅ QR generado exitosamente");
+    qrModal.style.display = "flex";
+    
+  } catch (error) {
+    console.error("❌ Error generando QR con QRCode.js:", error);
+    mostrarQRFallback(url, qrcodeDiv);
+    qrModal.style.display = "flex";
+  }
+}
+
+// Función de respaldo cuando falla QRCode.js
+function mostrarQRFallback(url, contenedor) {
+  console.log("🔄 Usando método de respaldo para QR");
+  
+  contenedor.innerHTML = `
+    <div style="text-align: center; padding: 20px;">
+      <h3 style="color: #333; margin-bottom: 15px;">Pagar con Mercado Pago</h3>
+      <div style="border: 2px dashed #00a650; border-radius: 10px; padding: 20px; margin: 15px 0;">
+        <p style="margin-bottom: 15px; color: #666;">
+          Haz clic en el enlace para completar tu pago:
+        </p>
+        <a href="${url}" target="_blank" 
+           style="display: inline-block; padding: 15px 30px; background: #00a650; 
+                  color: white; text-decoration: none; border-radius: 8px; 
+                  font-weight: bold; font-size: 16px;">
+          🔗 Ir a Mercado Pago
+        </a>
+      </div>
+      <p style="font-size: 12px; color: #999; margin-top: 10px;">
+        Se abrirá en una nueva ventana
+      </p>
+    </div>
+  `;
+}
+
 // Eventos al cargar
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("🚀 Inicializando aplicación...");
+  
+  // Verificar si QRCode.js está disponible
+  if (typeof QRCode !== 'undefined') {
+    console.log("✅ QRCode.js cargado correctamente");
+  } else {
+    console.warn("⚠️ QRCode.js no detectado, se usará método de respaldo");
+  }
+  
   mostrarSeccion("entradas");
 
   // Click en Finalizar Compra
   document.getElementById("finalizar-compra").addEventListener("click", finalizarCompra);
 
-  // Cerrar modal - CORREGIDO
+  // Cerrar modal de pago
   document.querySelector(".close-modal").addEventListener("click", cerrarModalPago);
 
-  // Opciones de pago - CORREGIDO
+  // Opciones de pago
   document.querySelectorAll(".payment-option").forEach(btn => {
-    btn.addEventListener("click", e => {
+    btn.addEventListener("click", async e => {
       const metodo = e.target.dataset.method;
-      
-      // Cerrar modal primero
+      console.log("💳 Método de pago seleccionado:", metodo);
+
+      if (metodo === "Mercado Pago") {
+        try {
+          // Mostrar loading
+          mostrarMensajeFlotante("Generando enlace de pago...", 'info');
+          
+          // Prepara los items para el backend
+          const items = carrito.map(prod => ({
+            title: prod.nombre,
+            quantity: prod.cantidad,
+            unit_price: prod.precio
+          }));
+          
+          console.log("📦 Items enviados al backend:", items);
+
+          // Llama al backend para crear la preferencia
+          const res = await fetch("/create_preference", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ items })
+          });
+          
+          const data = await res.json();
+          console.log("🔄 Respuesta del backend:", data);
+
+          if (data.init_point) {
+            console.log("✅ Init point recibido:", data.init_point);
+            mostrarQR(data.init_point);
+          } else {
+            console.error("❌ No se recibió init_point:", data);
+            mostrarMensajeFlotante("Error: No se pudo generar el enlace de pago", 'info');
+          }
+        } catch (error) {
+          console.error("💥 Error en el proceso de pago:", error);
+          mostrarMensajeFlotante("Error de conexión. Intenta nuevamente.", 'info');
+        }
+        
+        cerrarModalPago();
+        return;
+      }
+
+      // Otros métodos de pago
       cerrarModalPago();
-      
-      // Mostrar mensaje de método de pago cargado
       mostrarMensajeFlotante(`Su método de pago "${metodo}" ha sido cargado exitosamente`, 'info');
-      
-      // Esperar un poco antes de mostrar el mensaje de compra finalizada
       setTimeout(() => {
         mostrarMensajeFlotante(`Compra finalizada con ${metodo}. ¡Gracias por su pedido!`, 'exito');
-        
-        // Limpiar carrito y cerrar
         carrito = [];
         actualizarCarrito();
         cerrarCarrito();
@@ -426,6 +571,18 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("paymentModal").addEventListener("click", function(e) {
     if (e.target === this) {
       cerrarModalPago();
+    }
+  });
+
+  // Cerrar QR modal
+  document.querySelector(".close-qr").addEventListener("click", function() {
+    document.getElementById("qrModal").style.display = "none";
+  });
+  
+  // Cerrar QR modal al hacer click fuera
+  document.getElementById("qrModal").addEventListener("click", function(e) {
+    if (e.target === this) {
+      this.style.display = "none";
     }
   });
 });
